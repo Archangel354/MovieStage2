@@ -2,16 +2,13 @@ package com.example.android.moviestage2;
 
 
 import android.app.LoaderManager;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,6 +40,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public final static String TOPRATEDSTRING = "https://api.themoviedb.org/3/movie/top_rated?api_key=02ff7187d940e5bd15cd5acd2b41b63e";
     public String urlPosterString = POPULARSTRING;
     private boolean firstTimeRunFlag = true;
+
+    public final static String VIDEOSTRING = "https://api.themoviedb.org/3/movie/335984/videos?api_key=02ff7187d940e5bd15cd5acd2b41b63e";
+    public final static String VIDEOKEY ="dZOaI_Fn5o4";
+    public final static String VIDEOURL ="https://www.youtube.com/watch?v=gCcx85zbxz4";
+
 
     // Find a reference to the {@link GridView} in the layout
     public GridView movieGridView;
