@@ -7,6 +7,8 @@ import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +22,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.squareup.picasso.Picasso;
+import static com.example.android.moviestage2.MainActivity.VIDEOPREFIX;
+import static com.example.android.moviestage2.MainActivity.VIDEOSUFIX;
 
 import static com.example.android.moviestage2.Utils.movies;
 
@@ -35,6 +41,10 @@ public class DetailActivity extends AppCompatActivity {
     private TextView mSynopsisDisplay;
     private TextView mPosterDisplay;
     private Context context;
+    private Button btnTrailer;
+    private TextView mMovieID;
+
+
 
 
 
@@ -61,7 +71,11 @@ public class DetailActivity extends AppCompatActivity {
         String mSynopsis = mBundle.getString("MBUNDLE_SYNOPSIS");
         mSynopsisDisplay.setText(mSynopsis);
         String mPoster = mBundle.getString("MBUNDLE_POSTER");
-        //mSynopsisDisplay.setText(mPoster);
+        mMovieID = (TextView) findViewById(R.id.txtMovieID);
+
+        btnTrailer = (Button) findViewById(R.id.btnTrailer);
+
+
 
 
 
@@ -85,7 +99,18 @@ public class DetailActivity extends AppCompatActivity {
             }
         }
 
-    }private Intent createShareForecastIntent() {
+        btnTrailer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(DetailActivity.this, VIDEOPREFIX + mMovieID + VIDEOSUFIX, Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailActivity.this, VIDEOPREFIX + VIDEOSUFIX, Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+    }
+    private Intent createShareForecastIntent() {
         Intent shareIntent = ShareCompat.IntentBuilder.from(this)
                 .setType("text/plain")
                 .setText(mMovies + MOVIES_SHARE_HASHTAG)

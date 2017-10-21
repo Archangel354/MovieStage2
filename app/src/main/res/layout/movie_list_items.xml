@@ -7,7 +7,13 @@
     >
 
     <TextView
-        android:id="@+id/txtPoster"
+    android:id="@+id/txtPoster"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/txtMovieID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"/>

@@ -27,6 +27,28 @@ import java.util.List;
  * Created by Owner on 9/10/2017.
  */
 
+import android.text.TextUtils;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Owner on 9/10/2017.
+ */
+
 public final class Utils {
 
     /** Tag for the log messages */
@@ -105,7 +127,7 @@ public final class Utils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving the movie JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -193,10 +215,11 @@ public final class Utils {
                 String dateString = currentMovie.getString("release_date");
                 String voteString = currentMovie.getString("vote_average");
                 String synopsisString = currentMovie.getString("overview");
+                String movieIDString = currentMovie.getString("id");
                 Log.i("UTILS","The posterUrlString is: " + posterUrlString);
                 Log.i("UTILS","The titleString is: " + titleString);
 
-                MovieList mMovieList = new MovieList(posterUrlString, titleString, dateString, voteString, synopsisString);
+                MovieList mMovieList = new MovieList(posterUrlString, titleString, dateString, voteString, synopsisString, movieIDString);
                 movies.add(mMovieList);
 
             }
@@ -213,4 +236,3 @@ public final class Utils {
 
 
 }
-

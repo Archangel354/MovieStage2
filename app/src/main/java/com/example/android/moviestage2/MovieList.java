@@ -12,13 +12,16 @@ public class MovieList {
     private String mReleaseDate;
     private String mVoteAverage;
     private String mSynopsis;
+    private String mMovieID;
 
-    public MovieList(String PosterPath, String MovieTitle, String ReleaseDate, String VoteAverage, String Synopsis) {
+
+    public MovieList(String PosterPath, String MovieTitle, String ReleaseDate, String VoteAverage, String Synopsis, String MovieID) {
         mPosterPath = PosterPath;
         mMovieTitle = MovieTitle;
         mReleaseDate = ReleaseDate;
         mVoteAverage = VoteAverage;
         mSynopsis = Synopsis;
+        mMovieID = MovieID;
     }
 
 
@@ -40,5 +43,9 @@ public class MovieList {
 
     public String getmSynopsis() {
         return mSynopsis;
+    }
+
+    public String getmMovieID() {
+        return mMovieID;
     }
 }
