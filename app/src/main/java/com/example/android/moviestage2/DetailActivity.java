@@ -1,7 +1,11 @@
 package com.example.android.moviestage2;
 
+import android.app.Activity;
+import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -25,12 +29,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
 import static com.example.android.moviestage2.MainActivity.VIDEOPREFIX;
 import static com.example.android.moviestage2.MainActivity.VIDEOSUFIX;
 
 import static com.example.android.moviestage2.Utils.movies;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<MovieList>>{
 
     private static final String MOVIES_SHARE_HASHTAG = " #MoviesStage1App";
 
@@ -42,11 +49,8 @@ public class DetailActivity extends AppCompatActivity {
     private TextView mPosterDisplay;
     private Context context;
     private Button btnTrailer;
-    private TextView mMovieID;
-
-
-
-
+    private TextView mMovieIDDisplay;
+    private final Activity mActivity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +62,7 @@ public class DetailActivity extends AppCompatActivity {
         mVoteDisplay = (TextView) findViewById(R.id.txtVoteAverage);
         mSynopsisDisplay = (TextView) findViewById(R.id.txtSynopsis);
         mPosterDisplay = (TextView) findViewById(R.id.txtPoster);
-
+        mMovieIDDisplay = (TextView) findViewById(R.id.txtMovieID);
 
         Intent intentThatStartedThisActivity = getIntent();
         Bundle mBundle = intentThatStartedThisActivity.getExtras();
@@ -71,13 +75,9 @@ public class DetailActivity extends AppCompatActivity {
         String mSynopsis = mBundle.getString("MBUNDLE_SYNOPSIS");
         mSynopsisDisplay.setText(mSynopsis);
         String mPoster = mBundle.getString("MBUNDLE_POSTER");
-        mMovieID = (TextView) findViewById(R.id.txtMovieID);
+        final String mMovieID = mBundle.getString("MBUNDLE_MOVIEID");
 
         btnTrailer = (Button) findViewById(R.id.btnTrailer);
-
-
-
-
 
         //TextView txtPosterView = (TextView) convertView.findViewById(R.id.txtPoster);
         ImageView imageView = (ImageView) findViewById(R.id.imgPoster);
@@ -102,8 +102,17 @@ public class DetailActivity extends AppCompatActivity {
         btnTrailer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(DetailActivity.this, VIDEOPREFIX + mMovieID + VIDEOSUFIX, Toast.LENGTH_SHORT).show();
-                Toast.makeText(DetailActivity.this, VIDEOPREFIX + VIDEOSUFIX, Toast.LENGTH_SHORT).show();
+                //  Display the URL to get the trailer IDs for each movie
+                Toast.makeText(DetailActivity.this, VIDEOPREFIX + mMovieID + VIDEOSUFIX, Toast.LENGTH_SHORT).show();
+
+
+
+                // Play youtube trailer for the movie
+                mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=gCcx85zbxz4")));
+
+                //Intent mIntent = new Intent(DetailActivity.this, DetailActivity.class);
+                //Bundle mBundle = new Bundle();
+
 
 
             }
@@ -127,5 +136,19 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public Loader<List<MovieList>> onCreateLoader(int i, Bundle bundle) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<MovieList>> loader, List<MovieList> movieLists) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<MovieList>> loader) {
+
+    }
 }
 

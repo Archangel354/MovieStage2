@@ -6,7 +6,7 @@ package com.example.android.moviestage2;
 
 public class MovieList {
 
-    // image for a particular movie
+    // items for a particular movie
     private String mPosterPath;
     private String mMovieTitle;
     private String mReleaseDate;

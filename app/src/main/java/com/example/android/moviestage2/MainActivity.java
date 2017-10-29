@@ -123,6 +123,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 mBundle.putString("MBUNDLE_VOTE", movies.get(position).getmVoteAverage());
                 mBundle.putString("MBUNDLE_SYNOPSIS", movies.get(position).getmSynopsis());
                 mBundle.putString("MBUNDLE_POSTER", movies.get(position).getmPosterPath());
+                mBundle.putString("MBUNDLE_MOVIEID", movies.get(position).getmMovieID());
+
                 mIntent.putExtras(mBundle);
 
                 startActivity(mIntent);
