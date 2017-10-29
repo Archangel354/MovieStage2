@@ -51,6 +51,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private Button btnTrailer;
     private TextView mMovieIDDisplay;
     private final Activity mActivity = this;
+    private static final int VIDEOLIST_LOADER_ID = 2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +101,15 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             }
         }
 
+
+
         btnTrailer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //  Display the URL to get the trailer IDs for each movie
                 Toast.makeText(DetailActivity.this, VIDEOPREFIX + mMovieID + VIDEOSUFIX, Toast.LENGTH_SHORT).show();
 
+                getLoaderManager().restartLoader(VIDEOLIST_LOADER_ID, null, DetailActivity.this);
 
 
                 // Play youtube trailer for the movie
