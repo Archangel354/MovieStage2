@@ -15,10 +15,6 @@ import android.util.Log;
 
 import java.util.List;
 
-/**
- * Created by Owner on 9/17/2017.
- */
-
 public class MovieListLoader extends AsyncTaskLoader<List<MovieList>> {
 
     /** Query URL */
@@ -40,14 +36,10 @@ public class MovieListLoader extends AsyncTaskLoader<List<MovieList>> {
             return null;
         }
 
-        // Perform the network request, parse the response, and extract a list of earthquakes.
+        // Perform the network request, parse the response, and extract a list of movies along with
+        // the associated movie data i.e. title, posterpath, synopsis, etc.. .
         List<MovieList> movies = Utils.fetchMovieData(mUrl);
-
-
         return movies;
-
     }
-
-
 }
 

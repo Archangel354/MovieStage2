@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +23,7 @@ import java.util.List;
 import static com.example.android.moviestage2.MainActivity.VIDEOPREFIX;
 import static com.example.android.moviestage2.MainActivity.VIDEOSUFIX;
 
-public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<MovieList>>{
+public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<VideoList>>{
 
     private static final String MOVIES_SHARE_HASHTAG = " #MoviesStage1App";
     private String mMovies;
@@ -40,6 +41,10 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     /** Adapter for the list of trailers */
     private VideoAdapter vAdapter;
     private ArrayList arrayList;
+
+    public final static String VIDEOSTRING = "https://api.themoviedb.org/3/movie/335984/videos?api_key=02ff7187d940e5bd15cd5acd2b41b63e";
+    public String urlTrailerString = VIDEOSTRING;
+
 
 
     @Override
@@ -97,7 +102,6 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             @Override
             public void onClick(View v) {
                 //  Display the URL to get the trailer IDs for each movie
-                Toast.makeText(DetailActivity.this, VIDEOPREFIX + mMovieID + VIDEOSUFIX, Toast.LENGTH_SHORT).show();
                 vAdapter.clear();
                 vAdapter.notifyDataSetChanged();
                 getLoaderManager().restartLoader(VIDEOLIST_LOADER_ID, null, DetailActivity.this);
@@ -133,18 +137,21 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
 
     @Override
-    public Loader<List<MovieList>> onCreateLoader(int i, Bundle bundle) {
-        return null;
+    public Loader<List<VideoList>> onCreateLoader(int i, Bundle args) {
+        Log.i("ONCREATELOADERVIDEO... ","urlPosterString: " );
+        return new VideoListLoader(this, urlTrailerString);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<MovieList>> loader, List<MovieList> movieLists) {
+    public void onLoadFinished(Loader<List<VideoList>> loader, List<VideoList> movieLists) {
 
     }
 
     @Override
-    public void onLoaderReset(Loader<List<MovieList>> loader) {
+    public void onLoaderReset(Loader<List<VideoList>> loader) {
 
     }
+
+
 }
 

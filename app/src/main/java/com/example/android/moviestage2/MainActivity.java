@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public String urlPosterString = POPULARSTRING;
     private boolean firstTimeRunFlag = true;
 
-    public final static String VIDEOSTRING = "https://api.themoviedb.org/3/movie/335984/videos?api_key=02ff7187d940e5bd15cd5acd2b41b63e";
     public final static String VIDEOKEY ="dZOaI_Fn5o4";
     public final static String VIDEOURL ="https://www.youtube.com/watch?v=gCcx85zbxz4";
     public final static String VIDEOPREFIX = "https://api.themoviedb.org/3/movie/";
