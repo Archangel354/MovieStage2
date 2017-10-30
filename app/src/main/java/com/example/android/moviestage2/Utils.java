@@ -6,34 +6,9 @@ package com.example.android.moviestage2;
 
 import android.text.TextUtils;
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-/**
- * Created by Owner on 9/10/2017.
- */
-
-import android.text.TextUtils;
-import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,10 +19,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by Owner on 9/10/2017.
- */
 
 public final class Utils {
 
@@ -162,8 +133,6 @@ public final class Utils {
      * about the first movie from the input moviesJSON string.
      */
     private static List extractFeatureFromJson(String moviesJSON) {
-        String authors = "";
-        String publisher = "";
         String posterBaseString = "https://image.tmdb.org/t/p/w185/";
         JSONArray featureArray = null;
 
@@ -182,29 +151,7 @@ public final class Utils {
             } else
             {
                 // Built placeholder JSON string in case "items" not found
-                String placeholderJSON = "{\n" +
-                        " \"kind\": \"movies#volumes\",\n" +
-                        " \"totalItems\": 2135,\n" +
-                        " \"items\": [\n" +
-                        "  {\n" +
-                        "   \"kind\": \"movies#volume\",\n" +
-                        "   \"id\": \"9e9Kn9N8yP0C\",\n" +
-                        "   \"etag\": \"fyWDBegzDw0\",\n" +
-                        "   \"selfLink\": \"https://www.googleapis.com/movies/v1/volumes/9e9Kn9N8yP0C\",\n" +
-                        "   \"volumeInfo\": {\n" +
-                        "    \"title\": \"No items found\",\n" +
-                        "    \"authors\": [\n" +
-                        "     \"No items found\"" +
-                        "    ],\n" +
-                        "    \"publisher\": \"\\\"No items found\\\"\",\n" +
-                        "    \"publishedDate\": \"No items found\"\n" +
-                        "   }\n" +
-                        "\n" +
-                        "  }\n" +
-                        " ]\n" +
-                        "}";
-                baseJsonResponse = new JSONObject(placeholderJSON);
-                featureArray = baseJsonResponse.getJSONArray("items");
+
             }
 
             for (int i = 0;i < featureArray.length();i++){
@@ -231,8 +178,5 @@ public final class Utils {
         Log.i("UTILS","movies is: " + movies);
         return movies;
     }
-
-
-
 
 }

@@ -15,33 +15,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.ShareCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.example.android.moviestage2.MainActivity.VIDEOPREFIX;
 import static com.example.android.moviestage2.MainActivity.VIDEOSUFIX;
-
-import static com.example.android.moviestage2.Utils.movies;
 
 public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<MovieList>>{
 
     private static final String MOVIES_SHARE_HASHTAG = " #MoviesStage1App";
-
     private String mMovies;
     private TextView mMovieDisplay;
     private TextView mDateDisplay;
