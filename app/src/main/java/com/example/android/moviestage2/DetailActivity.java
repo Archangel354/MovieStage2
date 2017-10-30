@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.android.moviestage2.MainActivity.VIDEOPREFIX;
@@ -52,6 +53,10 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private TextView mMovieIDDisplay;
     private final Activity mActivity = this;
     private static final int VIDEOLIST_LOADER_ID = 2;
+
+    /** Adapter for the list of trailers */
+    private VideoAdapter vAdapter;
+    private ArrayList arrayList;
 
 
     @Override
@@ -80,6 +85,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         final String mMovieID = mBundle.getString("MBUNDLE_MOVIEID");
 
         btnTrailer = (Button) findViewById(R.id.btnTrailer);
+        // Create a 2nd adapter that takes an empty list of trailers as input
+        vAdapter = new VideoAdapter(DetailActivity.this, new ArrayList<VideoList>());
 
         //TextView txtPosterView = (TextView) convertView.findViewById(R.id.txtPoster);
         ImageView imageView = (ImageView) findViewById(R.id.imgPoster);
@@ -108,7 +115,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             public void onClick(View v) {
                 //  Display the URL to get the trailer IDs for each movie
                 Toast.makeText(DetailActivity.this, VIDEOPREFIX + mMovieID + VIDEOSUFIX, Toast.LENGTH_SHORT).show();
-
+                vAdapter.clear();
+                vAdapter.notifyDataSetChanged();
                 getLoaderManager().restartLoader(VIDEOLIST_LOADER_ID, null, DetailActivity.this);
 
 
