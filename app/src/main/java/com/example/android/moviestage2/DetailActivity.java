@@ -36,8 +36,11 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private TextView mMovieIDDisplay;
     private final Activity mActivity = this;
     private static final int VIDEOLIST_LOADER_ID = 2;
-    public final static String TRAILERPREFIX = "https://api.themoviedb.org/3/movie/";
-    public final static String TRAILERSUFIX = "/videos?api_key=02ff7187d940e5bd15cd5acd2b41b63e";
+    private final static String TRAILERPREFIX = "https://www.youtube.com/watch?v=";
+    private final static String MOVIEPREFIX = "https://api.themoviedb.org/3/movie/";
+    private final static String MOVIESUFFIX = "/videos?api_key=02ff7187d940e5bd15cd5acd2b41b63e";
+
+
 
 
 
@@ -74,6 +77,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         mSynopsisDisplay.setText(mSynopsis);
         String mPoster = mBundle.getString("MBUNDLE_POSTER");
         final String mMovieID = mBundle.getString("MBUNDLE_MOVIEID");
+
+        urlTrailerString = MOVIEPREFIX + mMovieID + MOVIESUFFIX;
 
         btnTrailer = (Button) findViewById(R.id.btnTrailer);
         // Create a 2nd adapter that takes an empty list of trailers as input
@@ -147,7 +152,11 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
         Log.i("onLoadFinished... ","trailer: " + trailer);
         // Play youtube trailer for the movie
-        mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=gCcx85zbxz4")));
+        String mKey = trailer.get(0).getmTrailerKey();
+        Log.i("onLoadFinished... ","trailer key: " + TRAILERPREFIX + mKey);
+
+        mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(TRAILERPREFIX + mKey)));
+
 
 
     }
