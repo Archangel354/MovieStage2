@@ -39,6 +39,7 @@ public class VideoListLoader extends AsyncTaskLoader<List<VideoList>> {
         Log.i("VideoListLoader: ", "mUrl is: " + mUrl);
 
 
-        return null;
+        List<VideoList> trailer = TrailerUtils.fetchTrailerData(mUrl);
+        return trailer;
     }
 }

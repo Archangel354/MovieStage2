@@ -25,41 +25,41 @@ import java.util.List;
 public final class TrailerUtils {
 
     /** Tag for the log messages */
-    public static final String LOG_TAG = Utils.class.getSimpleName();
+    public static final String LOG_TAG = TrailerUtils.class.getSimpleName();
 
-    // Create an empty ArrayList that we can start adding movies to
-    static ArrayList<MovieList> movies = new ArrayList<>();
+    // Create an empty ArrayList that we can start adding a trailer to
+    static ArrayList<VideoList> trailer = new ArrayList<>();
 
     /**
-     * Query the iMdb dataset and return an {@link List} object to represent a single movie.
+     * Query the iMdb dataset and return an {@link List} object to represent a single trailer.
      */
-    public static List fetchMovieData(String requestUrl) {
+    public static List fetchTrailerData(String requestUrl) {
 
-        movies.clear();  // RD 9/27/17
+        trailer.clear();  // RD 9/27/17
 
         // Create URL object
-        URL url = createUrl(requestUrl);
+        URL url = createTrailerUrl(requestUrl);
 
         // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
         try {
-            jsonResponse = makeHttpRequest(url);
+            jsonResponse = makeTrailerHttpRequest(url);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
 
         // Extract relevant fields from the JSON response and create an {@link List} object
-        List movies = extractFeatureFromJson(jsonResponse);
+        List trailer = extractTrailerFeatureFromJson(jsonResponse);
 
         // Return the {@link List}
-        return movies;
+        return trailer;
     }
 
 
     /**
      * Returns new URL object from the given string URL.
      */
-    private static URL createUrl(String stringUrl) {
+    private static URL createTrailerUrl(String stringUrl) {
         URL url = null;
         try {
             url = new URL(stringUrl);
@@ -72,7 +72,7 @@ public final class TrailerUtils {
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
-    private static String makeHttpRequest(URL url) throws IOException {
+    private static String makeTrailerHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
         // If the URL is null, then return early.
@@ -100,7 +100,7 @@ public final class TrailerUtils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the movie JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving the trailer JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -134,22 +134,21 @@ public final class TrailerUtils {
      * Return an {@link List} object by parsing out information
      * about the first movie from the input moviesJSON string.
      */
-    private static List extractFeatureFromJson(String moviesJSON) {
-        String posterBaseString = "https://image.tmdb.org/t/p/w185/";
+    private static List extractTrailerFeatureFromJson(String trailerJSON) {
         JSONArray featureArray = null;
 
         // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(moviesJSON)) {
+        if (TextUtils.isEmpty(trailerJSON)) {
             return null;
         }
         try {
-            JSONObject baseJsonResponse = new JSONObject(moviesJSON);
+            JSONObject baseJsonResponse = new JSONObject(trailerJSON);
 
             // Checking if "items" is present
             if (baseJsonResponse.has("results")) {
                 featureArray = baseJsonResponse.getJSONArray("results");
 
-                Log.i("INSIDE Utils.java", "inside if has results");
+                Log.i("INSIDE TrailerUtils ", "inside if has results");
             } else
             {
                 // Built placeholder JSON string in case "items" not found
@@ -158,27 +157,21 @@ public final class TrailerUtils {
 
             for (int i = 0;i < featureArray.length();i++){
                 JSONObject currentMovie = featureArray.getJSONObject(i);
-                String poster_path = currentMovie.getString("poster_path");
-                String posterUrlString = posterBaseString + poster_path;
-                String titleString = currentMovie.getString("title");
-                String dateString = currentMovie.getString("release_date");
-                String voteString = currentMovie.getString("vote_average");
-                String synopsisString = currentMovie.getString("overview");
-                String movieIDString = currentMovie.getString("id");
-                Log.i("UTILS","The posterUrlString is: " + posterUrlString);
-                Log.i("UTILS","The titleString is: " + titleString);
+                String trailerKeyString = currentMovie.getString("key");
+                Log.i("TrailerUtils","The trailerKeyString is: " + trailerKeyString);
 
-                MovieList mMovieList = new MovieList(posterUrlString, titleString, dateString, voteString, synopsisString, movieIDString);
-                movies.add(mMovieList);
+
+                VideoList mTrailerList = new VideoList(trailerKeyString);
+                trailer.add(mTrailerList);
 
             }
 
         } catch (JSONException e) {
-            Log.e(LOG_TAG, "Problem parsing the mMovieList JSON results", e);
+            Log.e(LOG_TAG, "Problem parsing the mTrailerList JSON results", e);
 
         }
-        Log.i("UTILS","movies is: " + movies);
-        return movies;
+        Log.i("UTILS","trailer is: " + trailer);
+        return trailer;
     }
 
 

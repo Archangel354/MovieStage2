@@ -20,8 +20,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
-import static com.example.android.moviestage2.MainActivity.VIDEOPREFIX;
-import static com.example.android.moviestage2.MainActivity.VIDEOSUFIX;
+
 
 public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<VideoList>>{
 
@@ -37,6 +36,10 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private TextView mMovieIDDisplay;
     private final Activity mActivity = this;
     private static final int VIDEOLIST_LOADER_ID = 2;
+    public final static String TRAILERPREFIX = "https://api.themoviedb.org/3/movie/";
+    public final static String TRAILERSUFIX = "/videos?api_key=02ff7187d940e5bd15cd5acd2b41b63e";
+
+
 
     /** Adapter for the list of trailers */
     private VideoAdapter vAdapter;
