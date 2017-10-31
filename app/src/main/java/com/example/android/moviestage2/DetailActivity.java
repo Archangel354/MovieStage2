@@ -110,13 +110,10 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
                 getLoaderManager().restartLoader(VIDEOLIST_LOADER_ID, null, DetailActivity.this);
 
 
-                // Play youtube trailer for the movie
-                mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=gCcx85zbxz4")));
+
 
                 //Intent mIntent = new Intent(DetailActivity.this, DetailActivity.class);
                 //Bundle mBundle = new Bundle();
-
-
 
             }
         });
@@ -146,7 +143,12 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     }
 
     @Override
-    public void onLoadFinished(Loader<List<VideoList>> loader, List<VideoList> movieLists) {
+    public void onLoadFinished(Loader<List<VideoList>> loader, List<VideoList> trailer) {
+
+        Log.i("onLoadFinished... ","trailer: " + trailer);
+        // Play youtube trailer for the movie
+        mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=gCcx85zbxz4")));
+
 
     }
 
