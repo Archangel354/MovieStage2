@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // so the list can be populated in the user interface
         movieGridView.setAdapter(mAdapter);
 
-        Spinner mSpinner = (Spinner) findViewById(R.id.spnPopOrRated);
+        Spinner mSpinner = (Spinner) findViewById(R.id.spnPopOrRatedOrFavorite);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> spinAdapter = ArrayAdapter.createFromResource(this,
@@ -101,8 +101,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     mAdapter.notifyDataSetChanged();
                     getLoaderManager().restartLoader(MOVIELIST_LOADER_ID, null, MainActivity.this);
 
+                } else if (selected.contains("Personal Favorites")){
+                    firstTimeRunFlag = false;
+                    urlPosterString = TOPRATEDSTRING;
+                    mAdapter.clear();
+                    movieGridView.setAdapter(mAdapter);
+                    mAdapter.notifyDataSetChanged();
+                    getLoaderManager().restartLoader(MOVIELIST_LOADER_ID, null, MainActivity.this);
                 } else {
-                    Toast.makeText(MainActivity.this,"Neither spinner choice executed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"No spinner choice executed", Toast.LENGTH_SHORT).show();
+
                 }
             }
 
