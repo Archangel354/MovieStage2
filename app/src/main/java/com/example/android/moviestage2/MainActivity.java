@@ -5,6 +5,7 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -30,9 +31,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
      */
     private static final int MOVIELIST_LOADER_ID = 1;
 
-    /** Adapter for the list of movies */
+    /** Adapter for the gridview of movies */
     private MovieAdapter mAdapter;
     private ArrayList arrayList;
+
+    /** Adapter for the gridview of personal favorite movies */
+    private FavoriteCursorAdapter favoriteCursorAdapter;
+    private ArrayList favoritesList;
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -51,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     // Find a reference to the {@link GridView} in the layout
     public GridView movieGridView;
+    public GridView favoriteGridView;
 
     private String urlImageBaseString = "https://image.tmdb.org/t/p/w185/";
 
@@ -59,14 +65,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         movieGridView = (GridView) findViewById(R.id.movieGrid);
+        favoriteGridView = (GridView) findViewById(R.id.favoriteGrid);
+
 
 
         // Create a new adapter that takes an empty list of movies as input
         mAdapter = new MovieAdapter(this, new ArrayList<MovieList>());
+        favoriteCursorAdapter = new FavoriteCursorAdapter(this, null);
+
 
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
         movieGridView.setAdapter(mAdapter);
+        favoriteGridView.setAdapter(favoriteCursorAdapter);
 
         Spinner mSpinner = (Spinner) findViewById(R.id.spnPopOrRatedOrFavorite);
 
@@ -103,8 +114,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
                 } else if (selected.contains("Personal Favorites")){
                     firstTimeRunFlag = false;
-                    urlPosterString = TOPRATEDSTRING;
-                    mAdapter.clear();
+                    favoriteCursorAdapter.isEmpty();
                     movieGridView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
                     getLoaderManager().restartLoader(MOVIELIST_LOADER_ID, null, MainActivity.this);

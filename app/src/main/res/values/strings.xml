@@ -5,6 +5,8 @@
     <string name="action_map">Map Location</string>
     <string name="error_message">An error has occcured.  Please try again by clicking REF...</string>
     <string name="movieTitle">Title:</string>
+    <string name="empty_view_title_text">The shelves are empty...</string>
+    <string name="empty_view_subtitle_text">Get started by adding a product</string>
 
     <string-array name="movie_choices">
         <item>Most Popular</item>
