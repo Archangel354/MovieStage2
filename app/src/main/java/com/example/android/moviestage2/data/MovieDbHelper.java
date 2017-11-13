@@ -35,7 +35,8 @@ public class MovieDbHelper extends SQLiteOpenHelper {
                 + MovieContract.MovieEntry.COLUMN_MOVIE_RELEASE_DATE + " TEXT NOT NULL, "
                 + MovieContract.MovieEntry.COLUMN_MOVIE_POSTER_IMAGE + " TEXT NOT NULL, "
                 + MovieContract.MovieEntry.COLUMN_MOVIE_VOTE_AVERAGE + " TEXT NOT NULL, "
-                + MovieContract.MovieEntry.COLUMN_MOVIE_SYNOPSIS + " TEXT NOT NULL);";
+                + MovieContract.MovieEntry.COLUMN_MOVIE_SYNOPSIS + " TEXT NOT NULL, "
+                + MovieContract.MovieEntry.COLUMN_MOVIE_ID + " TEXT NOT NULL );";
 
         // Execute the SQL statement
         db.execSQL(SQL_CREATE_MOVIES_TABLE);
