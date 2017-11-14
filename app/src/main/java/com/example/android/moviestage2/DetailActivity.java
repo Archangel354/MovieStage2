@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,16 +55,6 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     public String urlTrailerString = VIDEOSTRING;
 
     private ImageButton imgbtnFavorite;
-
-    //Addding cursorAdapter variables
-    private EditText mTitleEditText;
-    private EditText mDateEditText;
-    private EditText mVoteEditText;
-    private EditText mSynopsisEditText;
-    private EditText mPosterText;
-    private EditText mMovieIDText;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,17 +169,17 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private void saveProduct() {
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
-        String titleString = mTitleEditText.getText().toString().trim();
-        String dateString = mDateEditText.getText().toString().trim();
-        String voteString = mVoteEditText.getText().toString().trim();
-        String synopsisString = mSynopsisEditText.getText().toString().trim();
-        String posterString = mPosterText.getText().toString().trim();
-        String movieIDString = mMovieIDText.getText().toString().trim();
+        String titleString = mMovieDisplay.getText().toString().trim();
+        String dateString = mDateDisplay.getText().toString().trim();
+        String voteString = mVoteDisplay.getText().toString().trim();
+        String synopsisString = mSynopsisDisplay.getText().toString().trim();
+//        String posterString = mPosterDisplay.getText().toString().trim();
+//        String movieIDString = mMovieIDDisplay.getText().toString().trim();
 
 
         // Check if this is supposed to be a new favorite moview
         // and check if all the fields in the editor are blank
-        if (TextUtils.isEmpty(movieIDString)   && TextUtils.isEmpty(posterString) &&
+        if (
                 TextUtils.isEmpty(titleString) && TextUtils.isEmpty(dateString) &&
                 TextUtils.isEmpty(voteString)  && TextUtils.isEmpty(synopsisString)) {
             // Since no fields were modified, we can return early without creating a new favorite movie.
@@ -205,8 +194,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         values.put(MovieEntry.COLUMN_MOVIE_RELEASE_DATE, dateString);
         values.put(MovieEntry.COLUMN_MOVIE_VOTE_AVERAGE, voteString);
         values.put(MovieEntry.COLUMN_MOVIE_SYNOPSIS, synopsisString);
-        values.put(MovieEntry.COLUMN_MOVIE_POSTER_IMAGE, posterString);
-        values.put(MovieEntry.COLUMN_MOVIE_ID, movieIDString);
+       // values.put(MovieEntry.COLUMN_MOVIE_POSTER_IMAGE, posterString);
+        //values.put(MovieEntry.COLUMN_MOVIE_ID, movieIDString);
 
 
         // Determine if this is a new or existing product by checking if mCurrentProductUri is null or not
