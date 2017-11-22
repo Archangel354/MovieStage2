@@ -140,9 +140,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // Create a new loader for the given URL
         mAdapter.clear();
         mAdapter.notifyDataSetChanged();
-        Log.i("ONCREATELOADER... ","urlPosterString: " + urlPosterString);
-        return new MovieListLoader(this, urlPosterString);
-    }
+        Log.i("ONCREATELOADER... ", "urlPosterString: " + urlPosterString);
+
+            return new MovieListLoader(this, urlPosterString);
+        }
+
+
 
     @Override
     public void onLoadFinished(Loader<List<MovieList>> loader, List<MovieList> movies) {
